@@ -11,4 +11,8 @@ class MyFontStyles {
     fontSize: 30,
     fontWeight: FontWeight.bold,
   );
+  static final TextStyle nextStyle = TextStyle(
+    color: MyColors.titleFontColor,
+    fontSize: 24,
+  );
 }

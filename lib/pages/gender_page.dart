@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:register_demo/pages/hoppies_page.dart';
+import 'package:register_demo/static_data/gender_type.dart';
 import 'package:register_demo/static_data/static_colors.dart';
 import 'package:register_demo/static_data/static_font_styles.dart';
+import 'package:register_demo/static_data/static_methods.dart';
+import 'package:register_demo/ui_components/my_avatar.dart';
 
 class GenderPage extends StatelessWidget {
+  BuildContext context;
   @override
   Widget build(BuildContext context) {
+    this.context = context;
     return Scaffold(
       backgroundColor: MyColors.backgroundColor,
       appBar: _buildAppBar(),
@@ -25,12 +31,17 @@ class GenderPage extends StatelessWidget {
         _buildSubtitle(),
         _buildTitle(),
         SizedBox(height: 32),
-        Expanded(child: Placeholder(color: Colors.red)),
+        Expanded(
+          child: Hero(
+            tag: 'boy',
+            child: MyAvatar(),
+          ),
+        ),
         SizedBox(height: 32),
-        Expanded(child: Placeholder(color: Colors.blue)),
+        Expanded(child: MyAvatar(type: GenderType.girl)),
         SizedBox(height: 64),
-        Placeholder(fallbackHeight: 60, color: MyColors.titleFontColor),
-        SizedBox(height: 20),
+        _buildNextButton(),
+        SizedBox(height: 10),
       ],
     );
   }
@@ -52,4 +63,25 @@ class GenderPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildNextButton() {
+    return Container(
+      width: double.infinity,
+      height: 60,
+      margin: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: Colors.black.withOpacity(.25),
+        ),
+      ),
+      child: FlatButton(
+        onPressed: next,
+        child: Text('Next', style: MyFontStyles.nextStyle),
+        splashColor: MyColors.btnSplash,
+      ),
+    );
+  }
+
+  void next() => StaticMethods.goTo(context, HoppiesPage());
 }
