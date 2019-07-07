@@ -15,4 +15,8 @@ class MyFontStyles {
     color: MyColors.titleFontColor,
     fontSize: 24,
   );
+  static final TextStyle optionStyle = TextStyle(
+    color: MyColors.backgroundColor,
+    fontSize: 16,
+  );
 }

@@ -3,9 +3,12 @@ import 'package:register_demo/static_data/gender_type.dart';
 
 class MyAvatar extends StatefulWidget {
   final GenderType type;
-
+  final String tag;
+  bool clicked;
   MyAvatar({
     this.type = GenderType.boy,
+    this.tag = 'boy',
+    this.clicked = false,
   });
 
   @override
@@ -15,10 +18,11 @@ class MyAvatar extends StatefulWidget {
 class _MyAvatarState extends State<MyAvatar> {
   double size = 200;
   int duration = 200;
-  Color color = Colors.blue;
+  Color color = Colors.indigo;
   Curve curve = Curves.fastLinearToSlowEaseIn;
   @override
   Widget build(BuildContext context) {
+    if (widget.clicked) color = Colors.green;
     return AnimatedContainer(
       curve: curve,
       duration: Duration(milliseconds: duration),
@@ -28,10 +32,13 @@ class _MyAvatarState extends State<MyAvatar> {
         radius: double.infinity,
         backgroundColor: color,
         child: InkWell(
-          onTap: _onClick,
-          child: Image.asset(
-            'lib/imgs/${widget.type == GenderType.boy ? 'boy' : 'girl'}.png',
-            scale: 2.5,
+          onTap: widget.clicked ? null : _onClick,
+          child: Hero(
+            tag: widget.tag,
+            child: Image.asset(
+              'lib/imgs/${widget.type == GenderType.boy ? 'boy' : 'girl'}.png',
+              scale: 2.5,
+            ),
           ),
         ),
       ),
@@ -42,7 +49,7 @@ class _MyAvatarState extends State<MyAvatar> {
     // First animation
     size = 80;
     duration = 250;
-    color = Colors.yellow;
+    color = Colors.blue;
     curve = Curves.fastLinearToSlowEaseIn;
     setState(() {});
     await Future.delayed(
@@ -52,7 +59,7 @@ class _MyAvatarState extends State<MyAvatar> {
     curve = Curves.easeInCirc;
     duration = 180;
     size = 200;
-    color = Colors.amber;
+    color = Colors.green;
     setState(() {});
   }
 }

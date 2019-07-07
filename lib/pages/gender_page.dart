@@ -25,20 +25,16 @@ class GenderPage extends StatelessWidget {
     );
   }
 
+  MyAvatar boy = MyAvatar();
   Widget _buildBody() {
     return Column(
       children: <Widget>[
         _buildSubtitle(),
         _buildTitle(),
         SizedBox(height: 32),
-        Expanded(
-          child: Hero(
-            tag: 'boy',
-            child: MyAvatar(),
-          ),
-        ),
+        Expanded(child: boy),
         SizedBox(height: 32),
-        Expanded(child: MyAvatar(type: GenderType.girl)),
+        Expanded(child: MyAvatar(type: GenderType.girl, tag: 'girl')),
         SizedBox(height: 64),
         _buildNextButton(),
         SizedBox(height: 10),
@@ -83,5 +79,8 @@ class GenderPage extends StatelessWidget {
     );
   }
 
-  void next() => StaticMethods.goTo(context, HoppiesPage());
+  void next() {
+    boy.clicked = true;
+    StaticMethods.goTo(context, HoppiesPage(avatar: boy));
+  }
 }
