@@ -37,11 +37,12 @@ class _MyOptionState extends State<MyOption> {
   }
 
   void clicked() async {
+    if (HoppiesPage.count >= 3 && !isClicked) return;
     setState(() {
       if (isClicked) {
-        HoppiesPage.count++;
-      } else {
         HoppiesPage.count--;
+      } else {
+        HoppiesPage.count++;
       }
       isClicked = !isClicked;
       size = 120;

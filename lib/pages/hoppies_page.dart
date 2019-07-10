@@ -104,13 +104,9 @@ class _HoppiesPageState extends State<HoppiesPage> {
         displayText: '%',
         backgroundColor: Colors.pink,
         progressColor: Colors.indigo,
+        animatedDuration: Duration(milliseconds: 200),
+        borderRadius: 25,
       ),
     );
-  }
-
-  String _getText(){
-    switch(HoppiesPage.count){
-      case 0
-    }
   }
 }
